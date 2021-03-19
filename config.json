@@ -1,5 +1,12 @@
 {
     "bot_name": "边境",
     "bot_id": "",
-    "password": ""
+    "password": "",
+    "listen": [],
+    "function": {
+        "join_tips": true
+    },
+    "tipsTemplate": {
+        "join": "[nickname] 请仔细阅读群规则，避免活不下去。"
+    }
 }
