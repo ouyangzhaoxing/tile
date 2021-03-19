@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "jsonfile": "^6.1.0",
-    "oicq": "^1.14.1"
+    "oicq": "^1.14.1",
+    "sqlite3": "^5.0.2"
   }
 }

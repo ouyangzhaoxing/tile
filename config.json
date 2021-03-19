@@ -4,9 +4,14 @@
     "password": "",
     "listen": [],
     "function": {
-        "join_tips": true
+        "join_tips": true,
+        "banned_name": true,
+        "banned_name_tips": true,
+        "banned_name_kick": true
     },
     "tipsTemplate": {
-        "join": "[nickname] 请仔细阅读群规则，避免活不下去。"
+        "join": "[nickname] 请仔细阅读群规则，避免活不下去。",
+        "banned_name_ban": "[nickname] 你的昵称已违规请，及时修改！",
+        "banned_name_kick": "[nickname] 你的昵称严重违规，已被移出群聊。"
     }
 }
