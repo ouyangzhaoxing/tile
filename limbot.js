@@ -166,9 +166,20 @@ jsonfile.readFile("./config.json", function (err, config) {
     let cmd = data.message[data.message.length - 1].data.text.split(" ").filter(c => c != "");
 
     switch (cmd[0]) {
-      // 特殊命令
+      case "清理群员":
+        if (isOwnerOrAdmin(data)) clearGroup(data, cmd[1]); break;
       default: questionAnswer(data); break;
     }
+
+  }
+
+  /** 判断是否是群主或管理员 */
+  function isOwnerOrAdmin(data) {
+    return data.sender.role === "owner" || data.sender.role === "admin";
+  }
+
+  /** 清理群员 */
+  function clearGroup(data, num) {
 
   }
 
