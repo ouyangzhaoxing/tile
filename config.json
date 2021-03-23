@@ -14,7 +14,8 @@
         "banned_message_withdraw": true,
         "banned_message_gag": true,
         "banned_message_kick": true,
-        "question_answer": true
+        "question_answer": true,
+        "long_code_withdraw": true
     },
     "tipsTemplate": {
         "join": "[nickname] 请仔细阅读群规则，避免活不下去。",
