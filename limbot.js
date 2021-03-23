@@ -237,14 +237,13 @@ jsonfile.readFile("./config.json", function (err, config) {
 
     if (!config.function.long_code_withdraw) return false;
 
-    if ((data.raw_message.indexOf("#include") !== -1 || data.raw_message.indexOf("public class") !== -1)
-      && data.raw_message.length > 320) {
+    if (data.raw_message.length > 320 &&
+      (data.raw_message.indexOf("#include") !== -1 || data.raw_message.indexOf("public class") !== -1)) {
 
       bot.deleteMsg(data.message_id);
 
       bot.sendGroupMsg(data.group_id, "[CQ:at,qq=" + data.user_id + "] 长代码请使用链接分享避免刷屏");
-      bot.sendGroupMsg(data.group_id, "[CQ:share,url=https://paste.blinking.fun,title=代码粘贴板, \
-        content=开源免费、永久保存的代码粘贴板,image=https://cdn-1251216093.file.myqcloud.com/paste/res/icon.ico]");
+      bot.sendGroupMsg(data.group_id, "[CQ:share,url=https://paste.blinking.fun,title=代码粘贴板,content=开源免费、永久保存的代码粘贴板,image=https://cdn-1251216093.file.myqcloud.com/paste/res/icon.ico]");
 
       return true;
 
