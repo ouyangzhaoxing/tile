@@ -2,6 +2,7 @@ const fs = require('fs');
 const jsonfile = require('jsonfile');
 const sqlite3 = require('sqlite3').verbose();
 const { createClient } = require("oicq");
+const { setInterval } = require('timers');
 
 jsonfile.readFile("./config.json", function (err, config) {
 
@@ -46,6 +47,8 @@ jsonfile.readFile("./config.json", function (err, config) {
   });
 
   bot.login(config.password); // 登录
+
+  setTimeout(() => { setInterval(() => { autoTalk(); }, config.auto_talk_interval); }, 10000); // 自动说话
 
   /*-------------------------------------------------------------------------*/
 
@@ -250,6 +253,20 @@ jsonfile.readFile("./config.json", function (err, config) {
     }
 
     return false;
+
+  }
+
+  /** 自动说话（防封号） */
+  function autoTalk() {
+
+    let cmd = "SELECT * FROM AUTO_TALK ORDER BY RANDOM() LIMIT 1;";
+    violationData.get(cmd, function (err, row) {
+
+      let index = Math.floor(Math.random() * config.listen.length);
+
+      bot.sendGroupMsg(config.listen[index], row.TEXT);
+
+    });
 
   }
 

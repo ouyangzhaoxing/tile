@@ -4,6 +4,7 @@
     "password": "",
     "listen": [],
     "msg_no_check_level": 4,
+    "auto_talk_interval": 300000,
     "function": {
         "join_tips": true,
         "banned_name": true,
