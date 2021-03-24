@@ -38,7 +38,7 @@ jsonfile.readFile("./config.json", function (err, config) {
 
     if (longCodeWithdraw(data)) return;
 
-    answer(data);
+    try { answer(data); } catch (error) { } // TODO 异常处理
 
     if (data.sender.level >= config.msg_no_check_level) return; // 忽略检查等级较高的成员
 
