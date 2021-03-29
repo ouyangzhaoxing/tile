@@ -139,10 +139,10 @@ jsonfile.readFile("./config.json", function (err, config) {
       }
 
       if (violationValueCount < 5) return; // 未达到违规数值
+      if (data.sender.level >= config.no_kick_level) violationValueCount = 5; // 限制踢出群组等级
 
       let tips = "违规发言";
-
-      if (data.sender.level >= no_kick_level) violationValueCount = 5;
+      let cmd = "INSERT INTO VIOLATION_RECORDS VALUES ($USER_ID, $GROUP_ID, $TYPE, $REMARK, $TIME);";
 
       if (violationValueCount === 5) { // 禁言
         tips = config.tipsTemplate.banned_message_ban;
@@ -154,12 +154,17 @@ jsonfile.readFile("./config.json", function (err, config) {
         if (config.function.banned_message_kick) bot.setGroupKick(data.group_id, data.user_id);
       }
 
-      if (config.function.banned_message_withdraw && violationValueCount >= 5) // 撤回消息
-        bot.deleteMsg(data.message_id);
+      if (config.function.banned_message_withdraw) bot.deleteMsg(data.message_id);
 
       tips = tips.replace("[nickname]", "[CQ:at,qq=" + data.user_id + "]");
-
       if (config.function.banned_message_tips) bot.sendGroupMsg(data.group_id, tips); // 违规提示
+
+      violationData.run(cmd, {
+        $USER_ID: data.user_id, $GROUP_ID: data.group_id,
+        $TYPE: violationValueCount > 5 ? "踢出" : "禁言",
+        $REMARK: data.raw_message,
+        $TIME: (new Date()).toLocaleString()
+      });
 
     });
 
