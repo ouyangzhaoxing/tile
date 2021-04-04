@@ -1,9 +1,9 @@
-const fs = require('fs');
-const jsonfile = require('jsonfile');
-const sqlite3 = require('sqlite3').verbose();
-const linkify = require('linkify-it')();
+const fs = require("fs");
+const jsonfile = require("jsonfile");
+const sqlite3 = require("sqlite3").verbose();
+const linkify = require("linkify-it")();
 const { createClient } = require("oicq");
-const { setInterval } = require('timers');
+const { setInterval } = require("timers");
 
 var config, violationData, bot, messageHistories = [];
 
@@ -11,7 +11,7 @@ jsonfile.readFile("./config.json", function (err, _config) {
 
   if (err) { console.error(err); return; } else { config = _config; }
 
-  linkify.tlds(require('tlds'));
+  linkify.tlds(require("tlds"));
 
   violationData = new sqlite3.Database("./data.sqlite3"); // 打开数据库
 
